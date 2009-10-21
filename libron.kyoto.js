@@ -3,7 +3,6 @@
 
 var libron = libron ? libron : new Object();
 libron.kyoto = {
-  version: "1.0",
   name: '京都府',
   groups: ['府立', '京都市・亀岡', '丹後', '中丹西部', '中丹東部', '南丹', '山城中部', '山城南部'],
   libraries: {
