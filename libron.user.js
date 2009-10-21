@@ -10,6 +10,7 @@
 // @require       http://github.com/champierre/libron/raw/master/libron.kanagawa.js
 // @require       http://github.com/champierre/libron/raw/master/libron.chiba.js
 // @require       http://github.com/champierre/libron/raw/master/libron.hyogo.js
+// @require       http://github.com/gifuron/libron/raw/master/libron.gifu.js
 // using [ simple version of $X   ] (c) id:os0x
 //       [ relativeToAbsolutePath ] (c) id:Yuichirou
 //       [ parseHTML              ] copied from Pagerization (c) id:ofk
@@ -21,7 +22,7 @@
 
 var libron = libron ? libron : new Object();
 libron.version = "1.5";
-libron.prefectures = ['chiba', 'tokyo', 'kanagawa', 'kyoto', 'osaka', 'hyogo'];
+libron.prefectures = ['chiba', 'tokyo', 'kanagawa', 'kyoto', 'osaka', 'hyogo', 'gifu'];
 
 var okIcon = 'data:image/png;base64,'+
     'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0'+
