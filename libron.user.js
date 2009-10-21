@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          libron
 // @namespace     http://libron.net
-// @description	  Library Lookup from Amazon book listings. Currently supports libraries in Tokyo, Osaka, Kyoto, Kanagawa and Chiba.
+// @description	  Amazon のページから最寄りの図書館の蔵書を検索
 // @author        Junya Ishihara(http://github.com/champierre/)
 // @include       http://www.amazon.*
 // @require       http://github.com/champierre/libron/raw/master/libron.tokyo.js
