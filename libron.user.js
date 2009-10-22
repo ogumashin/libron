@@ -23,7 +23,7 @@ var libron = libron ? libron : new Object();
 libron.version = "1.5";
 
 // http://ja.wikipedia.org/wiki/都道府県 の並び順
-libron.prefectures = ['chiba', 'tokyo', 'kanagawa', 'gifu', 'kyoto', 'osaka'];
+libron.prefectures = ['chiba', 'tokyo', 'kanagawa', 'kyoto', 'osaka', 'hyogo'];
 
 var okIcon = 'data:image/png;base64,'+
     'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0'+
