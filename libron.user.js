@@ -10,22 +10,20 @@
 // @require       http://github.com/champierre/libron/raw/master/libron.kanagawa.js
 // @require       http://github.com/champierre/libron/raw/master/libron.chiba.js
 // @require       http://github.com/champierre/libron/raw/master/libron.hyogo.js
-// @require       http://github.com/champierre/libron/raw/master/libron.gifu.js
 // using [ simple version of $X   ] (c) id:os0x
 //       [ relativeToAbsolutePath ] (c) id:Yuichirou
 //       [ parseHTML              ] copied from Pagerization (c) id:ofk
 // merged with [ libron Osaka, Hyogo version ] (c) Mutsutoshi Yoshimoto(http://github.com/negachov/)
 // merged with [ libron Kyoto version ] (c) Takanobu Nishimura(http://github.com/takanobu/)
 // merged with [ libron Kanagawa version ] (c) Yukinori Suda(http://github.com/sudabon/)
-// merged with [ libron Gifu version ] (c) Gifuron(http://github.com/gifuron/)
 // thanks
 // ==/UserScript==
 
 var libron = libron ? libron : new Object();
-libron.version = "1.6";
+libron.version = "1.5";
 
 // http://ja.wikipedia.org/wiki/都道府県 の並び順
-libron.prefectures = ['chiba', 'tokyo', 'kanagawa', 'gifu', 'kyoto', 'osaka', 'hyogo'];
+libron.prefectures = ['chiba', 'tokyo', 'kanagawa', 'gifu', 'kyoto', 'osaka'];
 
 var okIcon = 'data:image/png;base64,'+
     'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0'+
