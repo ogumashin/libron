@@ -72,7 +72,7 @@ libron.saitama = {
           if (responseText.indexOf('id="SearchListDocListTitleCaption"', 0) > -1) {
             addLink(div, "javascript:(function(){var f=document.createElement('form');document.body.appendChild(f);f.method='POST';f.action='https://www.lib.pref.saitama.jp/licsxp-opac/WOpacTifSchCmpdExecAction.do';var c3=document.createElement('input');f.appendChild(c3);c3.name='condition3';c3.value='6';var c3t=document.createElement('input');f.appendChild(c3t);c3t.name='condition3Text';c3t.value='"+isbn+"';f.submit()})()");
           } else {
-            addNALink(div, "javascript:(function(){var f=document.createElement('form');document.body.appendChild(f);f.method='POST';f.action='https://www.lib.pref.saitama.jp/licsxp-opac/WOpacTifSchCmpdExecAction.do';var c3=document.createElement('input');f.appendChild(c3);c3.name='condition3';c3.value='6';var c3t=document.createElement('input');f.appendChild(c3t);c3t.name='condition3Text';c3t.value='"+isbn+"';f.submit()})()");
+            addNALink(div, 'javascript:void(0)', '_self');
           }
         });
       break;
