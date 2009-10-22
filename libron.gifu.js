@@ -6,7 +6,6 @@ libron.gifu = {
   name: '岐阜県',
   groups: ['岐阜地区','西濃地区','中濃地区','東濃地区','飛騨地区','大学図書館','専門図書館'],
   libraries: {
-//POSTDATA=kensaku_keyword_bookname=%A5%C6%A5%B9%A5%C8&kensaku_keyword_author1=&kensaku_keyword_publisher=&url0=1&lib00_param_srsl1=1&lib00_param_srsl2=2&lib00_param_srsl3=3
   'gifuken':{'group':'岐阜地区', 'name':'岐阜県図書館', 'code':'&url0=1&lib00_param_srsl1=1&lib00_param_srsl2=2&lib00_param_srsl3=3'},
   'gifusi':{'group':'岐阜地区', 'name':'岐阜市立図書館', 'code':'&url24=1&lib24_param_mngkbn=01'},
   'hasimasi':{'group':'岐阜地区', 'name':'羽島市立図書館', 'code':'&url32=1&lib32_param_mngkbn=01'},
@@ -67,10 +66,6 @@ libron.gifu = {
   },  
   checkLibrary: function(div, isbn){
     if(libron[selectedPrefecture].libraries[selectedLibrary].name == "岐阜県図書館") {
-//      postdata = "p_mode=1&g_mode=0&ryno=&c_key=&c_date=&list_cnt=&mad_list_cnt=&brws=ncdet&ktyp5=tyo%3A121A&ktyp6=tyo%3A101A&key6=&ktyp9=shk%7Catk%7Cspk%7Ckek&itfg9=c&ser_type=0&stkb=&sgid=spno&srsl1=1&srsl2=2&srsl3=3&key5=&ktyp0=shk&key0=&itfg0=c&ron0=a&ktyp1=atk&key1=&itfg1=c&ron1=a&ktyp2=spk&key2=&itfg2=c&ron2=a&ktyp3=shk%7Catk%7Cspk%7Ckek%7Ckjk%7Ctxt%7Cser&key3=&itfg3=c&ron3=a&ktyp4=tyo%3A931A&key4=&itfg4=c&tgid=tyo%3A010A&tkey=" + isbn + "&kkey=&skey=&srkbs=60&langlist=&ichiran=10";
-//      baseurl = "https://www.library.pref.gifu.jp/cgi-bin/Sopcsken.sh";
-//      libron.gifu._checkLibraryGifukenUnko(div, baseurl, postdata);
-
       date = new Date();
       postdata = "search_type=psearch&search_num=&req_time="+date.getTime()+"&tittle=&tittle_cdn=LIKE&writ1=&writ2=&writ_cdn=LIKE&writ_cdn2=AND&pub1=&pub_cdn=LIKE&mai1=&mai2=&mai3=&mai_cdn=AND&pdate1=&pdate2=&x=61&y=16&isbn="+isbn+"&isbn_cdn=&order=BI_TITL_K&orderby=+ASC";
       baseurl = "http://unicanet.ndl.go.jp/psrch/PSearch.do";
@@ -100,27 +95,6 @@ libron.gifu = {
       }
     });
   },
-//  _checkLibraryGifukenUnko: function(div, baseurl, postdata) {
-//    GM_xmlhttpRequest({
-//      method:"POST",
-//      headers: {'Content-type': 'application/x-www-form-urlencoded ; charset=Shift_JIS', 
-//      'Referer': 'https://www.library.pref.gifu.jp/cgi-bin/Sopcsmin.sh'},
-//      url: baseurl,
-//      data: postdata,
-//      onload:function(response){
-//addDebugText(div,response.responseText);
-//        var i = response.responseText.indexOf("該当資料はありません");
-//        if(i == -1) {
-//          addLink(div, "https://www.library.pref.gifu.jp/");
-//        } else {
-//          addNALink(div, "https://www.library.pref.gifu.jp/");
-//        }
-//      },
-//      onerror:function(response){
-//        addERLink(div,"https://www.library.pref.gifu.jp/");
-//      }
-//    });
-//  },
   _checkLibrary: function(div, baseurl, postdata) {
     GM_xmlhttpRequest({
       method:"POST",
@@ -128,7 +102,6 @@ libron.gifu = {
       url: baseurl,
       data: postdata,
       onload:function(response){
-//        var regex = /href=\"(http:\/\/(lib-gifu\.city\.gifu\.gifu\.jp\/search\/tosmok\.asp|www\.lib\.city\.hashima\.gifu\.jp\/SerlsWeb\/tosmok\.asp|www\.lib\.town\.ginan\.gifu\.jp\/kensaku\/tosmok\.asp|lib\.city\.kaizu\.lg\.jp\/tosyo\/tosmok\.asp|library\.town\.ikeda\.gifu\.jp\/tosmok\.asp|210\.172\.198\.254\/tosmok\.asp|lib\.town\.yoro\.gifu\.jp\/serls\/tosmok\.asp|www2\.town\.ibigawa\.gifu\.jp\/tosmok\.asp|library\.town\.tarui\.gifu\.jp\/tosmok\.asp|www\.library\.town\.godo\.lg\.jp\/tosyo\/tosmok\.asp).*?)\"/im;
         var regex = /href=\"(http:\/\/.*?\/tosmok\.asp\?.*?)\"/im;
         var match = regex.exec(response.responseText);
 
