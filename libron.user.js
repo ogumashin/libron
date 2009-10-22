@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          libron
 // @namespace     http://libron.net
-// @description	  Library Lookup from Amazon book listings. Currently supports libraries in Tokyo, Osaka, Kyoto, Kanagawa, Chiba and Saitama.
+// @description	  Amazon のページから最寄りの図書館の蔵書を検索
 // @author        Junya Ishihara(http://github.com/champierre/)
 // @include       http://www.amazon.*
 // @require       http://github.com/champierre/libron/raw/master/libron.tokyo.js
@@ -9,11 +9,12 @@
 // @require       http://github.com/champierre/libron/raw/master/libron.kyoto.js
 // @require       http://github.com/champierre/libron/raw/master/libron.kanagawa.js
 // @require       http://github.com/champierre/libron/raw/master/libron.chiba.js
+// @require       http://github.com/champierre/libron/raw/master/libron.hyogo.js
 // @require       http://github.com/champierre/libron/raw/master/libron.saitama.js
 // using [ simple version of $X   ] (c) id:os0x
 //       [ relativeToAbsolutePath ] (c) id:Yuichirou
 //       [ parseHTML              ] copied from Pagerization (c) id:ofk
-// merged with [ libron Osaka version ] (c) negachov(http://github.com/negachov/)
+// merged with [ libron Osaka, Hyogo version ] (c) Mutsutoshi Yoshimoto(http://github.com/negachov/)
 // merged with [ libron Kyoto version ] (c) Takanobu Nishimura(http://github.com/takanobu/)
 // merged with [ libron Kanagawa version ] (c) Yukinori Suda(http://github.com/sudabon/)
 // merged with [ libron Saitama version ] (c) MIKAMI Yoshiyuki(http://github.com/yoshuki/)
@@ -21,8 +22,8 @@
 // ==/UserScript==
 
 var libron = libron ? libron : new Object();
-libron.version = "1.4";
-libron.prefectures = ['chiba', 'tokyo', 'kanagawa', 'kyoto', 'osaka', 'saitama'];
+libron.version = "1.6";
+libron.prefectures = ['saitama', 'chiba', 'tokyo', 'kanagawa', 'kyoto', 'osaka', 'hyogo'];
 
 var okIcon = 'data:image/png;base64,'+
     'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0'+
@@ -257,6 +258,22 @@ function addERLink(div, url, target) {
   var link = document.createElement('div');
   link.innerHTML = '<span style=\"font-size:90%; background-color:#ffffcc;\">エラーが発生しました' + '<image src="' + ngIcon + '">' + '<a target="' + target + '" href="' + url + '">&raquo;検索サイトでチェックする？</a></span>';
   div.appendChild(link);
+}
+
+function addForm(div, form) {
+  var link = document.createElement('div');
+  link.innerHTML = '<span style=\"font-size:90%; background-color:#ffffcc;\"><a href="javascript:void(0);" onclick="document.forms[\'' + form.id + '\'].submit();">&raquo; ' + libron[selectedPrefecture].libraries[selectedLibrary].name + 'で予約</a></span>' +
+    '<image src="' + okIcon + '">';
+  div.appendChild(link);
+  div.appendChild(form);
+}
+
+function randomString(c,n){
+  var s='';
+  while(n--){
+    s += (c.split(''))[parseInt(Math.random()*c.length)];
+  }
+  return s;
 }
 
 function savePrefecture(value){
