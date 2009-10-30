@@ -247,6 +247,13 @@ function addLink(div, url) {
   div.appendChild(link);
 }
 
+function addAVLink(div, url) {
+  var link = document.createElement('div');
+  link.innerHTML = '<span style=\"font-size:90%; background-color:#ffffcc;\"><a target="_blank" href="' + url + '">&raquo; ' + libron[selectedPrefecture].libraries[selectedLibrary].name + 'に蔵書あり</a></span>' +
+    '<image src="' + okIcon + '">';
+  div.appendChild(link);
+}
+
 function addNALink(div, url) {
   var link = document.createElement('div');
   link.innerHTML = '<span style=\"font-size:90%; background-color:#ffffcc;\"><a target="_blank" href="' + url + '">&raquo; ' + libron[selectedPrefecture].libraries[selectedLibrary].name + 'には見つかりません</a></span>' +
