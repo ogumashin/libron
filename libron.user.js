@@ -12,6 +12,7 @@
 // @require       http://github.com/champierre/libron/raw/master/libron.hyogo.js
 // @require       http://github.com/champierre/libron/raw/master/libron.gifu.js
 // @require       http://github.com/champierre/libron/raw/master/libron.saitama.js
+// @require       http://github.com/champierre/libron/raw/master/libron.mie.js
 // using [ simple version of $X   ] (c) id:os0x
 //       [ relativeToAbsolutePath ] (c) id:Yuichirou
 //       [ parseHTML              ] copied from Pagerization (c) id:ofk
@@ -20,14 +21,15 @@
 // merged with [ libron Kanagawa version ] (c) Yukinori Suda(http://github.com/sudabon/)
 // merged with [ libron Gifu version ] (c)  Gifuron(http://github.com/gifuron/)
 // merged with [ libron Saitama version ] (c) MIKAMI Yoshiyuki(http://github.com/yoshuki/)
+// merged with [ libron Mie version ] (c) naoki.iimura (http://github.com/amatubu/)
 // thanks
 // ==/UserScript==
 
 var libron = libron ? libron : new Object();
-libron.version = "1.7";
+libron.version = "1.8";
 
 // http://ja.wikipedia.org/wiki/都道府県 の並び順
-libron.prefectures = ['saitama', 'chiba', 'tokyo', 'kanagawa', 'gifu', 'kyoto', 'osaka', 'hyogo'];
+libron.prefectures = ['saitama', 'chiba', 'tokyo', 'kanagawa', 'gifu', 'mie', 'kyoto', 'osaka', 'hyogo'];
 
 var okIcon = 'data:image/png;base64,'+
     'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0'+
@@ -245,6 +247,13 @@ function addLink(div, url, target) {
   target = target || '_blank';
   var link = document.createElement('div');
   link.innerHTML = '<span style=\"font-size:90%; background-color:#ffffcc;\"><a target="' + target + '" href="' + url + '">&raquo; ' + libron[selectedPrefecture].libraries[selectedLibrary].name + 'で予約</a></span>' +
+    '<image src="' + okIcon + '">';
+  div.appendChild(link);
+}
+
+function addAvailableLink(div, url) {
+  var link = document.createElement('div');
+  link.innerHTML = '<span style=\"font-size:90%; background-color:#ffffcc;\"><a target="_blank" href="' + url + '">&raquo; ' + libron[selectedPrefecture].libraries[selectedLibrary].name + 'に蔵書あり</a></span>' +
     '<image src="' + okIcon + '">';
   div.appendChild(link);
 }
