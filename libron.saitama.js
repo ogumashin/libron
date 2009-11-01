@@ -10,7 +10,7 @@ libron.saitama = {
     "kawagoe-shi":    {"group": "入間地区", "name": "川越市立図書館", "httpMethod": "GET"},
     "kawaguchi-shi":  {"group": "北足立地区", "name": "川口市立図書館", "httpMethod": "GET"},
     "koshigaya-shi":  {"group": "南埼玉地区", "name": "越谷市立図書館", "httpMethod": "POST"},
-    "saitama-ken":    {"group": "県内広域", "name": "埼玉県立図書館", "httpMethod": "POST"},
+    "saitama-ken":    {"group": "県内広域", "name": "埼玉県立図書館", "httpMethod": "GET"},
     "tokorozawa-shi": {"group": "入間地区", "name": "所沢市立所沢図書館", "httpMethod": "GET"}
   },
   checkLibrary: function(div, isbn) {
@@ -66,14 +66,27 @@ libron.saitama = {
         });
       break;
     case 'saitama-ken':
-      url = 'https://www.lib.pref.saitama.jp/licsxp-opac/WOpacTifSchCmpdExecAction.do';
-      data = 'condition3=6&condition3Text=' + isbn;
+      url = 'https://www.lib.pref.saitama.jp/licsxp-opac/WOpacTifSchCmpdDispAction.do';
+      data = '';
       onloadFunction = (function(responseText, responseHeaders) {
-          if (responseText.indexOf('id="SearchListDocListTitleCaption"', 0) > -1) {
-            addLink(div, "javascript:(function(){var f=document.createElement('form');document.body.appendChild(f);f.method='POST';f.action='https://www.lib.pref.saitama.jp/licsxp-opac/WOpacTifSchCmpdExecAction.do';var c3=document.createElement('input');f.appendChild(c3);c3.name='condition3';c3.value='6';var c3t=document.createElement('input');f.appendChild(c3t);c3t.name='condition3Text';c3t.value='"+isbn+"';f.submit()})()");
-          } else {
-            addNALink(div, 'javascript:void(0)', '_self');
-          }
+          var postData = 'condition3=6&condition3Text=' + isbn;
+          GM_xmlhttpRequest({
+            method: "POST",
+            url: "https://www.lib.pref.saitama.jp/licsxp-opac/WOpacTifSchCmpdExecAction.do",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            onload: function(res) {
+              try {
+                if (res.responseText.indexOf('id="SearchListDocListTitleCaption"', 0) > -1) {
+                  addLink(div, "javascript:(function(){var f=document.createElement('form');document.body.appendChild(f);f.method='POST';f.action='https://www.lib.pref.saitama.jp/licsxp-opac/WOpacTifSchCmpdExecAction.do';var c3=document.createElement('input');f.appendChild(c3);c3.name='condition3';c3.value='6';var c3t=document.createElement('input');f.appendChild(c3t);c3t.name='condition3Text';c3t.value='"+isbn+"';f.submit()})()");
+                } else {
+                  addNALink(div, 'javascript:void(0)', '_self');
+                }
+              } catch(e) {
+                return;
+              }
+            },
+            data: postData
+          });
         });
       break;
     case 'tokorozawa-shi':
