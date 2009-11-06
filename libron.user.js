@@ -72,11 +72,30 @@ function addSelectBox() {
   var div = document.createElement("div");
   div.style.textAlign = "right";
   div.style.backgroundColor = "#ffffcc";
-  div.style.padding = "3px 0 3px 0";
+  div.style.padding = "3px 3px 3px 0";
 
-  var titleSpan = document.createElement("span");
-  titleSpan.innerHTML = "Libron(Amazonから図書館蔵書検索) ver." + libron.version;
+  var titleDiv = document.createElement("div");
+  titleDiv.id = "libron_title";
+
+　　var titleSpan = document.createElement("span");
+  titleSpan.innerHTML = "Libron ver." + libron.version + " ";
   titleSpan.style.fontWeight = "bold";
+  titleSpan.style.color = "#e47911";
+
+  var currentLibrary = document.createElement("span");
+  currentLibrary.innerHTML = "[" + libron[selectedPrefecture].name + "]" + libron[selectedPrefecture].libraries[selectedLibrary].name + "で検索 "
+  currentLibrary.style.color = "#666666";
+
+  var showLink = document.createElement("a");
+  showLink.href = "javascript:void(0);";
+  showLink.addEventListener("click", showSelectBox, false);
+  showLink.innerHTML = "変更";
+
+  titleDiv.appendChild(titleSpan);
+  titleDiv.appendChild(currentLibrary);
+  titleDiv.appendChild(showLink);
+
+  var selectBoxDiv = document.createElement("div");
   
   var prefectureSelect = document.createElement("select");
   prefectureSelect.style.marginLeft = "10px";
@@ -92,27 +111,54 @@ function addSelectBox() {
   }
 
   var select = createLibrarySelectBox(selectedPrefecture);
-  
-  prefectureSelect.addEventListener("change", function(){
-    selectedPrefecture = prefectureSelect.value;
-    savePrefecture(prefectureSelect.value);
-    div.replaceChild(createLibrarySelectBox(prefectureSelect.value), div.childNodes[2]);
-  }, false);
 
   var btn = document.createElement("button");
   btn.style.marginLeft = "10px";
   btn.innerHTML = "保存";
 
-  div.appendChild(titleSpan);
-  div.appendChild(prefectureSelect);
-  div.appendChild(select);
-  div.appendChild(btn);  
-  document.body.insertBefore(div, document.body.childNodes[0]);
-  
+  var hideLink = document.createElement("a");
+  hideLink.style.margin = "0 0 0 3px";
+  hideLink.href = "javascript:void(0);";
+  hideLink.addEventListener("click", hideSelectBox, false);
+  hideLink.innerHTML = "キャンセル";
+
+  selectBoxDiv.appendChild(prefectureSelect);
+  selectBoxDiv.appendChild(select);
+  selectBoxDiv.appendChild(btn);
+  selectBoxDiv.appendChild(hideLink);
+  selectBoxDiv.id = "libron_select_box";
+  selectBoxDiv.style.display = "none";
+
+  prefectureSelect.addEventListener("change", function(){
+    selectedPrefecture = prefectureSelect.value;
+    savePrefecture(prefectureSelect.value);
+    selectBoxDiv.replaceChild(createLibrarySelectBox(prefectureSelect.value), selectBoxDiv.childNodes[1]);
+  }, false);
+
+  div.appendChild(titleDiv);
+  div.appendChild(selectBoxDiv);
+
+  // iframe内にはセレクトボックスを表示しない
+  if (parent == self) {
+    document.body.insertBefore(div, document.body.childNodes[0]);
+  }
+
   btn.addEventListener("click", function(){
-    saveLibrary(div.childNodes[2].value);
+    saveLibrary(selectBoxDiv.childNodes[1].value);
     window.location.reload();
   }, false);
+}
+
+function showSelectBox() {
+  document.getElementById('libron_title').style.display = 'none';
+  document.getElementById('libron_select_box').style.display = 'block';
+  return false;
+}
+
+function hideSelectBox() {
+  document.getElementById('libron_title').style.display = 'block';
+  document.getElementById('libron_select_box').style.display = 'none';
+  return false;
 }
 
 function createLibrarySelectBox(prefecture) {
