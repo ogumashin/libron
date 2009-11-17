@@ -21,12 +21,13 @@
 // merged with [ libron Kanagawa version ] (c) Yukinori Suda(http://github.com/sudabon/)
 // merged with [ libron Gifu version ] (c)  Gifuron(http://github.com/gifuron/)
 // merged with [ libron Saitama version ] (c) MIKAMI Yoshiyuki(http://github.com/yoshuki/)
+//                                        (c) Akira Yoshida(acura1971@gmail.com)
 // merged with [ libron Mie version ] (c) naoki.iimura (http://github.com/amatubu/)
 // thanks
 // ==/UserScript==
 
 var libron = libron ? libron : new Object();
-libron.version = "1.9";
+libron.version = "1.91";
 
 // http://ja.wikipedia.org/wiki/都道府県 の並び順
 libron.prefectures = ['saitama', 'chiba', 'tokyo', 'kanagawa', 'gifu', 'mie', 'kyoto', 'osaka', 'hyogo'];
